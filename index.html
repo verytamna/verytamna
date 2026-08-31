@@ -43,17 +43,17 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
 <div id="homeView" class="view active">
 
   <header class="sticky top-0 z-40 bg-[var(--mist)]/95 backdrop-blur border-b border-[var(--mid)]/10">
-    <div class="max-w-5xl mx-auto px-5 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <div class="berry-dot w-8 h-8"></div>
-        <span class="font-display text-xl text-[var(--deep)]">베리탐나</span>
+    <div class="max-w-5xl mx-auto px-4 sm:px-5 h-14 sm:h-16 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-1.5 sm:gap-2 min-w-0">
+        <div class="berry-dot w-7 h-7 sm:w-8 sm:h-8 shrink-0"></div>
+        <span class="font-display text-lg sm:text-xl text-[var(--deep)] whitespace-nowrap">베리탐나</span>
       </div>
-      <div class="flex items-center gap-2">
-        <button type="button" onclick="showLookup()" class="flex items-center gap-1.5 text-sm font-bold text-[var(--deep)] border-2 border-[var(--deep)]/15 rounded-full px-4 py-2 hover:bg-[var(--deep)] hover:text-white transition">
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <button type="button" onclick="showLookup()" class="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm font-bold text-[var(--deep)] border-2 border-[var(--deep)]/15 rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 whitespace-nowrap hover:bg-[var(--deep)] hover:text-white transition">
           <i class="fa-solid fa-magnifying-glass text-xs"></i> 주문조회
         </button>
-        <a href="tel:01012345678" class="flex items-center gap-1.5 text-sm font-bold text-[var(--deep)] border-2 border-[var(--deep)]/15 rounded-full px-4 py-2 hover:bg-[var(--deep)] hover:text-white transition">
-          <i class="fa-solid fa-phone text-xs"></i> 010-1234-5678
+        <a href="tel:01012345678" class="flex items-center justify-center gap-1.5 text-sm font-bold text-[var(--deep)] border-2 border-[var(--deep)]/15 rounded-full w-9 h-9 sm:w-auto sm:h-auto sm:px-4 sm:py-2 shrink-0 hover:bg-[var(--deep)] hover:text-white transition">
+          <i class="fa-solid fa-phone text-xs"></i><span class="hidden sm:inline whitespace-nowrap">010-1234-5678</span>
         </a>
       </div>
     </div>
@@ -133,17 +133,17 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
 <div id="orderView" class="view">
 
   <header class="sticky top-0 z-40 bg-[var(--mist)]/95 backdrop-blur border-b border-[var(--mid)]/10">
-    <div class="max-w-5xl mx-auto px-5 h-16 flex items-center justify-between">
-      <button type="button" onclick="showHome()" class="flex items-center gap-2">
-        <div class="berry-dot w-8 h-8"></div>
-        <span class="font-display text-xl text-[var(--deep)]">베리탐나</span>
+    <div class="max-w-5xl mx-auto px-4 sm:px-5 h-14 sm:h-16 flex items-center justify-between gap-2">
+      <button type="button" onclick="showHome()" class="flex items-center gap-1.5 sm:gap-2 min-w-0">
+        <div class="berry-dot w-7 h-7 sm:w-8 sm:h-8 shrink-0"></div>
+        <span class="font-display text-lg sm:text-xl text-[var(--deep)] whitespace-nowrap">베리탐나</span>
       </button>
-      <div class="flex items-center gap-2">
-        <button type="button" onclick="showLookup()" class="flex items-center gap-1.5 text-sm font-bold text-[var(--deep)] border-2 border-[var(--deep)]/15 rounded-full px-4 py-2 hover:bg-[var(--deep)] hover:text-white transition">
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <button type="button" onclick="showLookup()" class="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm font-bold text-[var(--deep)] border-2 border-[var(--deep)]/15 rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 whitespace-nowrap hover:bg-[var(--deep)] hover:text-white transition">
           <i class="fa-solid fa-magnifying-glass text-xs"></i> 주문조회
         </button>
-        <a href="tel:01012345678" class="flex items-center gap-1.5 text-sm font-bold text-[var(--deep)] border-2 border-[var(--deep)]/15 rounded-full px-4 py-2 hover:bg-[var(--deep)] hover:text-white transition">
-          <i class="fa-solid fa-phone text-xs"></i> 010-1234-5678
+        <a href="tel:01012345678" class="flex items-center justify-center gap-1.5 text-sm font-bold text-[var(--deep)] border-2 border-[var(--deep)]/15 rounded-full w-9 h-9 sm:w-auto sm:h-auto sm:px-4 sm:py-2 shrink-0 hover:bg-[var(--deep)] hover:text-white transition">
+          <i class="fa-solid fa-phone text-xs"></i><span class="hidden sm:inline whitespace-nowrap">010-1234-5678</span>
         </a>
       </div>
     </div>
@@ -309,13 +309,13 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
 <div id="lookupView" class="view">
 
   <header class="sticky top-0 z-40 bg-[var(--mist)]/95 backdrop-blur border-b border-[var(--mid)]/10">
-    <div class="max-w-5xl mx-auto px-5 h-16 flex items-center justify-between">
-      <button type="button" onclick="showHome()" class="flex items-center gap-2">
-        <div class="berry-dot w-8 h-8"></div>
-        <span class="font-display text-xl text-[var(--deep)]">베리탐나</span>
+    <div class="max-w-5xl mx-auto px-4 sm:px-5 h-14 sm:h-16 flex items-center justify-between gap-2">
+      <button type="button" onclick="showHome()" class="flex items-center gap-1.5 sm:gap-2 min-w-0">
+        <div class="berry-dot w-7 h-7 sm:w-8 sm:h-8 shrink-0"></div>
+        <span class="font-display text-lg sm:text-xl text-[var(--deep)] whitespace-nowrap">베리탐나</span>
       </button>
-      <a href="tel:01012345678" class="flex items-center gap-1.5 text-sm font-bold text-[var(--deep)] border-2 border-[var(--deep)]/15 rounded-full px-4 py-2 hover:bg-[var(--deep)] hover:text-white transition">
-        <i class="fa-solid fa-phone text-xs"></i> 010-1234-5678
+      <a href="tel:01012345678" class="flex items-center justify-center gap-1.5 text-sm font-bold text-[var(--deep)] border-2 border-[var(--deep)]/15 rounded-full w-9 h-9 sm:w-auto sm:h-auto sm:px-4 sm:py-2 shrink-0 hover:bg-[var(--deep)] hover:text-white transition">
+        <i class="fa-solid fa-phone text-xs"></i><span class="hidden sm:inline whitespace-nowrap">010-1234-5678</span>
       </a>
     </div>
   </header>

@@ -285,7 +285,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
   <footer class="bg-[var(--deep)] text-white/70 py-10">
     <div class="max-w-5xl mx-auto px-5 text-sm space-y-1.5">
       <div class="text-white font-display text-lg mb-2">베리탐나</div>
-      <p>대표자 : 최영미 · 주소 : 경상북도 경주시 안강읍 검단리 1170</p>
+      <p>대표자 : 최영미 · 주소 : 경상북도 경주시 안강읍 사방검단길 307</p>
       <p>입금계좌 : 농협 351-1335-1440-43 (예금주 최영미)</p>
       <p>문의전화 : 010-2560-6099 · 010-2590-2848</p>
     </div>
@@ -338,24 +338,48 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
 </div>
 
 <script>
-function showOrder(){
-  document.getElementById('homeView').classList.remove('active');
-  document.getElementById('orderView').classList.add('active');
-  document.getElementById('lookupView').classList.remove('active');
+// ── 화면 전환 + 뒤로가기 처리 ──
+// 블로그에서 들어온 고객이 주문 도중 '뒤로가기'를 누르면 곧장 블로그로 튕기던 문제 해결:
+// 화면을 바꿀 때마다 브라우저 방문기록(history)에 항목을 쌓아서,
+// 뒤로가기 = 시스템 안에서 이전 화면으로, 첫 화면에서 한 번 더 뒤로가야 블로그로 나가게 함.
+var VIEWS = { home: 'homeView', order: 'orderView', lookup: 'lookupView' };
+
+function applyView(name){
+  if(!VIEWS[name]) name = 'home';
+  for(var key in VIEWS){
+    document.getElementById(VIEWS[key]).classList.toggle('active', key === name);
+  }
   window.scrollTo(0,0);
 }
-function showHome(){
-  document.getElementById('orderView').classList.remove('active');
-  document.getElementById('lookupView').classList.remove('active');
-  document.getElementById('homeView').classList.add('active');
-  window.scrollTo(0,0);
+// history API가 막힌 환경(일부 웹뷰·file://)에서도 화면 전환은 되도록 try/catch로 감쌈
+function safePush(state, url){ try{ history.pushState(state, '', url); }catch(e){} }
+function safeReplace(state, url){ try{ history.replaceState(state, '', url); }catch(e){} }
+
+function navigate(name){
+  if(!VIEWS[name]) name = 'home';
+  var current = (history.state && history.state.view) || 'home';
+  applyView(name);                 // 화면 먼저 바꾸고
+  if(name === current) return;     // 같은 화면이면 기록 추가 안 함
+  safePush({ view: name }, name === 'home' ? '#' : '#' + name);
 }
-function showLookup(){
-  document.getElementById('homeView').classList.remove('active');
-  document.getElementById('orderView').classList.remove('active');
-  document.getElementById('lookupView').classList.add('active');
-  window.scrollTo(0,0);
+function showHome(){ navigate('home'); }
+function showOrder(){ navigate('order'); }
+function showLookup(){ navigate('lookup'); }
+
+function viewFromHash(){
+  var h = (location.hash || '').replace('#','');
+  return VIEWS[h] ? h : 'home';
 }
+window.addEventListener('popstate', function(e){
+  var name = (e.state && e.state.view) || viewFromHash();
+  applyView(name);
+});
+// 최초 진입: 해시(#order 등 북마크)까지 반영하고, 현재 화면을 history에 심어둠
+(function(){
+  var initial = viewFromHash();
+  applyView(initial);
+  safeReplace({ view: initial }, initial === 'home' ? (location.pathname + location.search) : '#' + initial);
+})();
 
 const priceMap = { 왕특: 45000, 특대: 40000, 대: 35000 };
 const cartQty = { 왕특: 0, 특대: 0, 대: 0 }; // 2kg 단위

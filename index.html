@@ -254,6 +254,11 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
           <input id="userAddress" type="text" placeholder="배송(또는 방문)받으실 주소" class="w-full px-4 py-3.5 rounded-xl border border-[var(--mid)]/15 bg-[var(--mist)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--mid)]/30">
         </div>
 
+        <!-- 스팸봇 차단용 함정 필드 (사람 눈엔 안 보임, 값이 채워지면 봇으로 판단) -->
+        <div aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">
+          <label>이 칸은 비워두세요<input type="text" id="hpField" name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+
         <p class="text-xs text-slate-400 mb-2 text-center">결제는 <b class="text-slate-500">계좌 입금</b>이에요. 접수하시면 입금 계좌를 바로 안내해 드려요.</p>
 
         <p id="orderStatusMsg" class="text-xs mb-4 leading-relaxed hidden"></p>
@@ -516,6 +521,7 @@ function update(){
 // ⚠️ 아래 SCRIPT_URL을 본인 구글 앱스 스크립트 배포 URL로 반드시 교체하세요.
 // (설정 방법은 대화창 안내 참고)
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzp5qsgoKn3804tUj1UseibUvTq7EC--GxkRj1P5iojoOHgHJjsn8tJh6J9JpUlNQo/exec';
+const PAGE_LOADED_AT = Date.now();
 
 function buildOrderData(){
   const items = getCartItems();
@@ -530,7 +536,9 @@ function buildOrderData(){
     total: subtotal + shipping,
     name: document.getElementById('userName').value.trim(),
     phone: document.getElementById('userPhone').value.trim(),
-    address: document.getElementById('userAddress').value.trim()
+    address: document.getElementById('userAddress').value.trim(),
+    hp: document.getElementById('hpField').value,
+    formTime: Date.now() - PAGE_LOADED_AT
   };
 }
 
@@ -575,6 +583,10 @@ document.getElementById('btnSubmitOrder').addEventListener('click', async ()=>{
   }
   if(!order.name || !order.phone || !order.address){
     showStatus('성함, 연락처, 주소를 모두 입력해주세요.', false);
+    return;
+  }
+  if(order.phone.replace(/\D/g,'').length < 9){
+    showStatus('연락처를 정확히 입력해주세요.', false);
     return;
   }
   const btn = document.getElementById('btnSubmitOrder');

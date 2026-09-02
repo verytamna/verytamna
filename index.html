@@ -30,7 +30,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
 .card-blob{border-radius:28px;}
 .pulse-dot{animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.step-btn{width:44px;height:44px;font-size:20px;}
+.step-btn{width:40px;height:40px;font-size:20px;}
+@media(min-width:640px){.step-btn{width:44px;height:44px;}}
 .view{display:none;}
 .view.active{display:block;}
 </style>
@@ -60,10 +61,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
   </header>
 
   <section class="sky relative overflow-hidden text-white">
-    <div class="max-w-5xl mx-auto px-5 pt-14 pb-20 relative z-10">
-      <span class="inline-flex items-center gap-2 text-xs font-bold bg-white/10 border border-white/20 rounded-full px-3 py-1.5 mb-6">
-        <span class="w-1.5 h-1.5 rounded-full bg-[var(--dawn)] pulse-dot"></span> 네이버 블로그 이웃님들을 위한 산지직송 페이지
-      </span>
+    <div class="max-w-5xl mx-auto px-5 pt-16 pb-20 relative z-10">
       <h1 class="font-display text-4xl leading-[1.2] sm:text-6xl mb-5 break-keep">
         오늘 새벽에 딴<br><span class="text-[var(--dawn)]">그 블루베리</span>,<br class="sm:hidden"> 그대로 보내드려요
       </h1>
@@ -85,6 +83,11 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
   <section class="max-w-5xl mx-auto px-5 py-16">
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
       <div class="card-blob bg-white p-6 border border-[var(--mid)]/10">
+        <div class="w-11 h-11 rounded-2xl bg-[var(--dawn)]/15 flex items-center justify-center mb-4 text-[var(--dawn)] text-lg"><i class="fa-solid fa-certificate"></i></div>
+        <h3 class="font-bold text-[var(--deep)] mb-1.5">GAP 인증 농장</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">농산물우수관리인증 획득 (제1028104호)</p>
+      </div>
+      <div class="card-blob bg-white p-6 border border-[var(--mid)]/10">
         <div class="w-11 h-11 rounded-2xl bg-[var(--leaf)]/10 flex items-center justify-center mb-4 text-[var(--leaf)] text-lg"><i class="fa-solid fa-seedling"></i></div>
         <h3 class="font-bold text-[var(--deep)] mb-1.5">화학비료 없이</h3>
         <p class="text-sm text-slate-500 leading-relaxed">발효 유기물만 사용해 건강하게 키웁니다.</p>
@@ -99,36 +102,10 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
         <h3 class="font-bold text-[var(--deep)] mb-1.5">이중 콜드체인</h3>
         <p class="text-sm text-slate-500 leading-relaxed">예냉 후 냉장 포장으로 신선하게 보내드려요.</p>
       </div>
-      <div class="card-blob bg-white p-6 border border-[var(--mid)]/10">
-        <div class="w-11 h-11 rounded-2xl bg-[var(--dawn)]/15 flex items-center justify-center mb-4 text-[var(--dawn)] text-lg"><i class="fa-solid fa-certificate"></i></div>
-        <h3 class="font-bold text-[var(--deep)] mb-1.5">GAP 인증 농장</h3>
-        <p class="text-sm text-slate-500 leading-relaxed">농산물우수관리인증 획득 (제1028104호)</p>
-      </div>
     </div>
     <a href="https://blog.naver.com/verytamna" target="_blank" class="mt-4 flex items-center justify-center gap-2 text-sm font-semibold text-[var(--leaf)] hover:underline">
       농원 수확 일기 더 보러가기 <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
     </a>
-  </section>
-
-  <section class="max-w-5xl mx-auto px-5 pb-20">
-    <h2 class="font-display text-2xl text-[var(--deep)] text-center mb-10">이렇게 주문해요</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6">
-      <div class="text-center">
-        <div class="w-12 h-12 mx-auto rounded-full bg-[var(--mid)]/10 text-[var(--mid)] font-display text-xl flex items-center justify-center mb-3">1</div>
-        <h3 class="font-bold text-[var(--deep)] mb-1">주문서 작성</h3>
-        <p class="text-sm text-slate-500 leading-relaxed break-keep">등급·수량과 연락처를 입력하고 접수합니다.</p>
-      </div>
-      <div class="text-center">
-        <div class="w-12 h-12 mx-auto rounded-full bg-[var(--mid)]/10 text-[var(--mid)] font-display text-xl flex items-center justify-center mb-3">2</div>
-        <h3 class="font-bold text-[var(--deep)] mb-1">계좌로 입금</h3>
-        <p class="text-sm text-slate-500 leading-relaxed break-keep">접수 후 안내되는 농협 계좌로 입금해 주세요.</p>
-      </div>
-      <div class="text-center">
-        <div class="w-12 h-12 mx-auto rounded-full bg-[var(--mid)]/10 text-[var(--mid)] font-display text-xl flex items-center justify-center mb-3">3</div>
-        <h3 class="font-bold text-[var(--deep)] mb-1">산지 직송</h3>
-        <p class="text-sm text-slate-500 leading-relaxed break-keep">입금이 확인되면 그날 수확한 블루베리를 보내드려요.</p>
-      </div>
-    </div>
   </section>
 
   <footer class="bg-[var(--deep)] text-white/70 py-10">
@@ -172,22 +149,24 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
 
   <section class="py-10">
     <div class="max-w-5xl mx-auto px-5">
-      <div class="text-center mb-10">
+      <div class="text-center mb-6">
         <h2 class="font-display text-2xl sm:text-3xl text-[var(--deep)] mb-2 whitespace-nowrap">알 크기를 고르고, 바로 주문하세요</h2>
-        <p class="text-xs sm:text-sm text-slate-500 whitespace-nowrap">동전 크기로 비교해보면 이해가 쉬워요. 원하는 크기를 눌러주세요.</p>
+        <p class="text-xs sm:text-sm text-slate-500">원하는 크기를 눌러 수량을 담아주세요.</p>
       </div>
 
+      <p class="text-center text-xs text-slate-400 mb-3">여러 상품을 함께 담을 수 있어요. (2kg 단위로만 주문 가능)</p>
+
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6" id="productCards">
-        <div data-key="왕특" data-price="45000" class="product-card border-2 border-slate-200 rounded-2xl p-4 sm:p-6 transition">
+        <div data-key="왕특" data-price="45000" class="product-card border-2 border-slate-200 rounded-2xl p-3 sm:p-6 transition">
           <div class="flex sm:block items-center gap-3">
             <div class="rounded-full bg-[var(--mid)] shrink-0" style="width:34px;height:34px;"></div>
-            <div class="flex-1 sm:mt-2">
-              <div class="text-[10px] sm:text-xs text-slate-400">500원 동전급</div>
+            <div class="flex-1 sm:mt-2 leading-tight">
+              <div class="text-[10px] sm:text-xs text-slate-400 mb-0.5">18mm 이상</div>
               <div class="font-bold text-sm sm:text-base text-[var(--deep)]">왕특</div>
               <div class="text-xs sm:text-sm font-black text-[var(--mid)]">45,000원<span class="text-[9px] sm:text-[10px] font-normal text-slate-400">/kg</span></div>
             </div>
           </div>
-          <div class="flex items-center justify-center gap-3 mt-3 pt-3 border-t border-slate-100">
+          <div class="flex items-center justify-center gap-3 mt-2 pt-2 sm:mt-3 sm:pt-3 border-t border-slate-100">
             <button type="button" class="qtyMinus step-btn rounded-full bg-[var(--mist)] border border-[var(--mid)]/20 font-bold text-[var(--mid)]">−</button>
             <div class="text-center w-12">
               <span class="qtyVal font-black text-lg text-[var(--deep)]">0</span><span class="text-xs text-slate-400">kg</span>
@@ -195,17 +174,16 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
             <button type="button" class="qtyPlus step-btn rounded-full bg-[var(--mist)] border border-[var(--mid)]/20 font-bold text-[var(--mid)]">＋</button>
           </div>
         </div>
-        <div data-key="특대" data-price="40000" class="product-card border-2 border-slate-200 rounded-2xl p-4 sm:p-6 transition relative">
-          <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 text-[10px] font-bold bg-[var(--dawn)] text-[var(--deep)] px-2 py-0.5 rounded-full">추천</span>
+        <div data-key="특대" data-price="40000" class="product-card border-2 border-slate-200 rounded-2xl p-3 sm:p-6 transition">
           <div class="flex sm:block items-center gap-3">
             <div class="rounded-full bg-[var(--mid)] shrink-0" style="width:26px;height:26px;"></div>
-            <div class="flex-1 sm:mt-2">
-              <div class="text-[10px] sm:text-xs text-slate-400">선물용 인기</div>
+            <div class="flex-1 sm:mt-2 leading-tight">
+              <div class="text-[10px] sm:text-xs text-slate-400 mb-0.5">16mm~18mm</div>
               <div class="font-bold text-sm sm:text-base text-[var(--deep)]">특대</div>
               <div class="text-xs sm:text-sm font-black text-[var(--mid)]">40,000원<span class="text-[9px] sm:text-[10px] font-normal text-slate-400">/kg</span></div>
             </div>
           </div>
-          <div class="flex items-center justify-center gap-3 mt-3 pt-3 border-t border-slate-100">
+          <div class="flex items-center justify-center gap-3 mt-2 pt-2 sm:mt-3 sm:pt-3 border-t border-slate-100">
             <button type="button" class="qtyMinus step-btn rounded-full bg-[var(--mist)] border border-[var(--mid)]/20 font-bold text-[var(--mid)]">−</button>
             <div class="text-center w-12">
               <span class="qtyVal font-black text-lg text-[var(--deep)]">0</span><span class="text-xs text-slate-400">kg</span>
@@ -213,16 +191,16 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
             <button type="button" class="qtyPlus step-btn rounded-full bg-[var(--mist)] border border-[var(--mid)]/20 font-bold text-[var(--mid)]">＋</button>
           </div>
         </div>
-        <div data-key="대" data-price="35000" class="product-card border-2 border-slate-200 rounded-2xl p-4 sm:p-6 transition">
+        <div data-key="대" data-price="35000" class="product-card border-2 border-slate-200 rounded-2xl p-3 sm:p-6 transition">
           <div class="flex sm:block items-center gap-3">
             <div class="rounded-full bg-[var(--mid)] shrink-0" style="width:18px;height:18px;"></div>
-            <div class="flex-1 sm:mt-2">
-              <div class="text-[10px] sm:text-xs text-slate-400">가성비</div>
+            <div class="flex-1 sm:mt-2 leading-tight">
+              <div class="text-[10px] sm:text-xs text-slate-400 mb-0.5">14mm~16mm</div>
               <div class="font-bold text-sm sm:text-base text-[var(--deep)]">대</div>
               <div class="text-xs sm:text-sm font-black text-[var(--mid)]">35,000원<span class="text-[9px] sm:text-[10px] font-normal text-slate-400">/kg</span></div>
             </div>
           </div>
-          <div class="flex items-center justify-center gap-3 mt-3 pt-3 border-t border-slate-100">
+          <div class="flex items-center justify-center gap-3 mt-2 pt-2 sm:mt-3 sm:pt-3 border-t border-slate-100">
             <button type="button" class="qtyMinus step-btn rounded-full bg-[var(--mist)] border border-[var(--mid)]/20 font-bold text-[var(--mid)]">−</button>
             <div class="text-center w-12">
               <span class="qtyVal font-black text-lg text-[var(--deep)]">0</span><span class="text-xs text-slate-400">kg</span>
@@ -231,7 +209,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
           </div>
         </div>
       </div>
-      <p class="text-center text-xs text-slate-400 mb-8">여러 상품을 함께 담을 수 있어요. (2kg 단위로만 주문 가능)</p>
 
       <div class="card-blob bg-white p-6 sm:p-8 border border-[var(--mid)]/10">
 
@@ -287,23 +264,20 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
         <!-- 접수 완료 시 노출되는 입금 안내 -->
         <div id="paySlip" class="hidden mt-4 rounded-2xl border-2 border-[var(--deep)] bg-white p-5">
           <div class="flex items-start gap-2 text-[var(--deep)] font-bold mb-3">
-            <i class="fa-solid fa-circle-check text-[var(--leaf)] mt-0.5"></i>
-            <span>주문이 접수됐어요. 아래 계좌로 <span class="text-[var(--dawn)]">입금</span>해 주세요.</span>
+            <i class="fa-solid fa-circle-check text-[var(--leaf)] mt-0.5 shrink-0"></i>
+            <span class="break-keep">주문이 접수됐어요.<br>아래 계좌로 <span class="text-[var(--dawn)]">입금</span>해 주세요.</span>
           </div>
-          <div class="space-y-2 text-sm">
-            <div class="flex justify-between items-baseline">
+          <div class="space-y-3 text-sm">
+            <div class="flex items-baseline justify-between border-b border-[var(--mid)]/10 pb-2.5">
               <span class="text-slate-500">입금 금액</span>
-              <span id="payAmount" class="font-black text-[var(--deep)] text-lg">0원</span>
+              <span id="payAmount" class="font-black text-[var(--deep)] text-xl">0원</span>
             </div>
-            <div class="flex justify-between items-center gap-2">
-              <span class="text-slate-500 shrink-0">입금 계좌</span>
-              <span class="text-right flex items-center gap-1.5 flex-wrap justify-end">
+            <div>
+              <div class="text-slate-500 mb-1.5">입금 계좌 <span class="text-slate-400">(예금주 최영미)</span></div>
+              <div class="flex items-center justify-between gap-2 bg-[var(--mist)] rounded-lg px-3 py-2.5">
                 <span class="font-bold text-[var(--deep)]">농협 351-1335-1440-43</span>
-                <button type="button" id="btnCopyAcct" class="text-xs border border-[var(--mid)]/30 rounded-md px-2 py-0.5 text-[var(--mid)] hover:bg-[var(--mist)] transition">복사</button>
-              </span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-slate-500">예금주</span><span class="text-slate-700">최영미</span>
+                <button type="button" id="btnCopyAcct" class="shrink-0 text-xs font-bold bg-white border border-[var(--mid)]/25 rounded-md px-2.5 py-1 text-[var(--mid)] hover:bg-[var(--deep)] hover:text-white hover:border-[var(--deep)] transition">복사</button>
+              </div>
             </div>
           </div>
           <div class="mt-3 pt-3 border-t border-[var(--mid)]/10 text-xs text-slate-500 leading-relaxed space-y-1">

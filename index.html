@@ -33,7 +33,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
 .step-btn{width:40px;height:40px;font-size:20px;}
 @media(min-width:640px){.step-btn{width:44px;height:44px;}}
 .view{display:none;}
-.view.active{display:block;}
+.view.active{display:flex; flex-direction:column; min-height:100vh; min-height:100dvh;}
+.view.active > footer{margin-top:auto;}
 </style>
 </head>
 <body class="text-[15px]">

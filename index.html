@@ -42,7 +42,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
 <!-- ========================================================= -->
 <!-- 화면 1 : 첫 화면 (랜딩)                                     -->
 <!-- ========================================================= -->
-<div id="homeView" class="view active">
+<div id="homeView" class="view">
 
   <header class="sticky top-0 z-40 bg-[var(--mist)]/95 backdrop-blur border-b border-[var(--mid)]/10">
     <div class="max-w-5xl mx-auto px-4 sm:px-5 h-14 sm:h-16 flex items-center justify-between gap-2">
@@ -123,7 +123,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
 <!-- ========================================================= -->
 <!-- 화면 2 : 주문 페이지                                        -->
 <!-- ========================================================= -->
-<div id="orderView" class="view">
+<div id="orderView" class="view active">
 
   <header class="sticky top-0 z-40 bg-[var(--mist)]/95 backdrop-blur border-b border-[var(--mid)]/10">
     <div class="max-w-5xl mx-auto px-4 sm:px-5 h-14 sm:h-16 flex items-center justify-between gap-2">
@@ -162,9 +162,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
           <div class="flex sm:block items-center gap-3">
             <div class="rounded-full bg-[var(--mid)] shrink-0" style="width:34px;height:34px;"></div>
             <div class="flex-1 sm:mt-2 leading-tight">
-              <div class="text-[10px] sm:text-xs text-slate-400 mb-0.5">18mm 이상</div>
-              <div class="font-bold text-sm sm:text-base text-[var(--deep)]">왕특</div>
-              <div class="text-xs sm:text-sm font-black text-[var(--mid)]">45,000원<span class="text-[9px] sm:text-[10px] font-normal text-slate-400">/kg</span></div>
+              <div class="font-bold text-lg sm:text-base text-[var(--deep)]">왕특 <span class="font-normal text-xs text-slate-400">18mm 이상</span></div>
+              <div class="text-xs sm:text-sm font-black text-[var(--mid)] mt-0.5">45,000원<span class="text-[9px] sm:text-[10px] font-normal text-slate-400">/kg</span></div>
             </div>
           </div>
           <div class="flex items-center justify-center gap-3 mt-2 pt-2 sm:mt-3 sm:pt-3 border-t border-slate-100">
@@ -179,9 +178,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
           <div class="flex sm:block items-center gap-3">
             <div class="rounded-full bg-[var(--mid)] shrink-0" style="width:26px;height:26px;"></div>
             <div class="flex-1 sm:mt-2 leading-tight">
-              <div class="text-[10px] sm:text-xs text-slate-400 mb-0.5">16mm~18mm</div>
-              <div class="font-bold text-sm sm:text-base text-[var(--deep)]">특대</div>
-              <div class="text-xs sm:text-sm font-black text-[var(--mid)]">40,000원<span class="text-[9px] sm:text-[10px] font-normal text-slate-400">/kg</span></div>
+              <div class="font-bold text-lg sm:text-base text-[var(--deep)]">특대 <span class="font-normal text-xs text-slate-400">16mm~18mm</span></div>
+              <div class="text-xs sm:text-sm font-black text-[var(--mid)] mt-0.5">40,000원<span class="text-[9px] sm:text-[10px] font-normal text-slate-400">/kg</span></div>
             </div>
           </div>
           <div class="flex items-center justify-center gap-3 mt-2 pt-2 sm:mt-3 sm:pt-3 border-t border-slate-100">
@@ -196,9 +194,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
           <div class="flex sm:block items-center gap-3">
             <div class="rounded-full bg-[var(--mid)] shrink-0" style="width:18px;height:18px;"></div>
             <div class="flex-1 sm:mt-2 leading-tight">
-              <div class="text-[10px] sm:text-xs text-slate-400 mb-0.5">14mm~16mm</div>
-              <div class="font-bold text-sm sm:text-base text-[var(--deep)]">대</div>
-              <div class="text-xs sm:text-sm font-black text-[var(--mid)]">35,000원<span class="text-[9px] sm:text-[10px] font-normal text-slate-400">/kg</span></div>
+              <div class="font-bold text-lg sm:text-base text-[var(--deep)]">대 <span class="font-normal text-xs text-slate-400">14mm~16mm</span></div>
+              <div class="text-xs sm:text-sm font-black text-[var(--mid)] mt-0.5">35,000원<span class="text-[9px] sm:text-[10px] font-normal text-slate-400">/kg</span></div>
             </div>
           </div>
           <div class="flex items-center justify-center gap-3 mt-2 pt-2 sm:mt-3 sm:pt-3 border-t border-slate-100">
@@ -404,8 +401,11 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
 // 뒤로가기 = 시스템 안에서 이전 화면으로, 첫 화면에서 한 번 더 뒤로가야 블로그로 나가게 함.
 var VIEWS = { home: 'homeView', order: 'orderView', lookup: 'lookupView' };
 
+// 주문서 작성 화면(order)이 기본 진입 화면. 홈 화면은 헤더 로고를 눌러야 나옴.
+var DEFAULT_VIEW = 'order';
+
 function applyView(name){
-  if(!VIEWS[name]) name = 'home';
+  if(!VIEWS[name]) name = DEFAULT_VIEW;
   for(var key in VIEWS){
     document.getElementById(VIEWS[key]).classList.toggle('active', key === name);
   }
@@ -416,11 +416,11 @@ function safePush(state, url){ try{ history.pushState(state, '', url); }catch(e)
 function safeReplace(state, url){ try{ history.replaceState(state, '', url); }catch(e){} }
 
 function navigate(name){
-  if(!VIEWS[name]) name = 'home';
-  var current = (history.state && history.state.view) || 'home';
+  if(!VIEWS[name]) name = DEFAULT_VIEW;
+  var current = (history.state && history.state.view) || DEFAULT_VIEW;
   applyView(name);                 // 화면 먼저 바꾸고
   if(name === current) return;     // 같은 화면이면 기록 추가 안 함
-  safePush({ view: name }, name === 'home' ? '#' : '#' + name);
+  safePush({ view: name }, name === DEFAULT_VIEW ? '#' : '#' + name);
 }
 function showHome(){ navigate('home'); }
 function showOrder(){ navigate('order'); }
@@ -428,17 +428,17 @@ function showLookup(){ navigate('lookup'); }
 
 function viewFromHash(){
   var h = (location.hash || '').replace('#','');
-  return VIEWS[h] ? h : 'home';
+  return VIEWS[h] ? h : DEFAULT_VIEW;
 }
 window.addEventListener('popstate', function(e){
   var name = (e.state && e.state.view) || viewFromHash();
   applyView(name);
 });
-// 최초 진입: 해시(#order 등 북마크)까지 반영하고, 현재 화면을 history에 심어둠
+// 최초 진입: 해시(#home, #lookup 등)까지 반영하고, 현재 화면을 history에 심어둠
 (function(){
   var initial = viewFromHash();
   applyView(initial);
-  safeReplace({ view: initial }, initial === 'home' ? (location.pathname + location.search) : '#' + initial);
+  safeReplace({ view: initial }, initial === DEFAULT_VIEW ? (location.pathname + location.search) : '#' + initial);
 })();
 
 const priceMap = { 왕특: 45000, 특대: 40000, 대: 35000 };

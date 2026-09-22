@@ -35,6 +35,11 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--mist);color:var(--in
 .view{display:none;}
 .view.active{display:flex; flex-direction:column; min-height:100vh; min-height:100dvh;}
 .view.active > footer{margin-top:auto;}
+header.sticky{transition:box-shadow .25s ease;}
+header.sticky.scrolled{box-shadow:0 2px 16px rgba(35,31,61,.10);}
+@media(prefers-reduced-motion:reduce){
+  header.sticky{transition:none;}
+}
 </style>
 </head>
 <body class="text-[15px]">
@@ -441,6 +446,17 @@ window.addEventListener('popstate', function(e){
   safeReplace({ view: initial }, initial === DEFAULT_VIEW ? (location.pathname + location.search) : '#' + initial);
 })();
 
+// ── 스크롤 시 상단 헤더에 그림자 ──
+(function(){
+  var headers = document.querySelectorAll('header.sticky');
+  function updateHeaderShadow(){
+    var scrolled = window.scrollY > 4;
+    headers.forEach(function(h){ h.classList.toggle('scrolled', scrolled); });
+  }
+  window.addEventListener('scroll', updateHeaderShadow, { passive: true });
+  updateHeaderShadow();
+})();
+
 const priceMap = { 왕특: 45000, 특대: 40000, 대: 35000 };
 const cartQty = { 왕특: 0, 특대: 0, 대: 0 }; // 2kg 단위
 let deliveryMethod = null; // '방문' | '택배'
@@ -533,7 +549,23 @@ function update(){
   } else {
     shipLine.textContent = shipping.toLocaleString() + '원';
   }
-  document.getElementById('totalPrice').textContent = total.toLocaleString();
+  animateNumber(document.getElementById('totalPrice'), total);
+}
+
+// motion.dev 로드가 끝나면(아래 모듈 스크립트) window.__motionAnimate가 채워짐.
+// 못 불러온 경우(오프라인 등)에는 즉시 숫자만 바뀌도록 자연스럽게 대체.
+function animateNumber(el, to){
+  var from = Number(el.dataset.val || 0);
+  el.dataset.val = to;
+  if(from === to){ el.textContent = to.toLocaleString(); return; }
+  if(window.__motionAnimate && !window.__prefersReducedMotion){
+    window.__motionAnimate(from, to, {
+      duration: 0.4, ease: 'easeOut',
+      onUpdate: function(v){ el.textContent = Math.round(v).toLocaleString(); }
+    });
+  } else {
+    el.textContent = to.toLocaleString();
+  }
 }
 
 // ⚠️ 아래 SCRIPT_URL을 본인 구글 앱스 스크립트 배포 URL로 반드시 교체하세요.
@@ -719,22 +751,38 @@ document.getElementById('lookupPhone').addEventListener('keydown', (e)=>{
 });
 </script>
 
-<!-- Motion (motion.dev) — 첫 화면 진입 + 스크롤 등장 애니메이션 -->
+<!-- Motion (motion.dev) — 진입 + 스크롤 등장 애니메이션 -->
 <script type="module">
+window.__prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 try {
   const { animate, inView, stagger } = await import("https://cdn.jsdelivr.net/npm/motion@13.2.0/+esm");
 
-  animate(
-    "#homeView h1, #homeView p, #homeView button",
-    { opacity: [0, 1], y: [16, 0] },
-    { duration: 0.6, delay: stagger(0.12), ease: "easeOut" }
-  );
+  // 숫자 카운트업(총 결제금액)에서 재사용할 수 있도록 전역에 노출
+  window.__motionAnimate = animate;
 
-  inView("#homeView .card-blob", ({ target }) => {
-    animate(target, { opacity: [0, 1], y: [20, 0] }, { duration: 0.5, ease: "easeOut" });
-  }, { margin: "0px 0px -10% 0px" });
+  if (!window.__prefersReducedMotion) {
+    // 첫 화면(홈) 진입 애니메이션
+    animate(
+      "#homeView h1, #homeView p, #homeView button",
+      { opacity: [0, 1], y: [16, 0] },
+      { duration: 0.6, delay: stagger(0.12), ease: "easeOut" }
+    );
+
+    // 주문 화면(기본 진입 화면) 상단 문구 + 상품 카드 진입 애니메이션
+    animate(
+      "#orderView h2, #orderView .product-card",
+      { opacity: [0, 1], y: [16, 0] },
+      { duration: 0.5, delay: stagger(0.08), ease: "easeOut" }
+    );
+
+    // 스크롤로 들어오는 카드(홈 강점 카드 + 주문 화면 후기 카드 등) 등장 애니메이션
+    inView("#homeView .card-blob, #orderView .card-blob", ({ target }) => {
+      animate(target, { opacity: [0, 1], y: [20, 0] }, { duration: 0.5, ease: "easeOut" });
+    }, { margin: "0px 0px -10% 0px" });
+  }
 } catch (e) {
-  // CDN을 못 불러와도(오프라인 등) 사이트 동작에는 영향 없음
+  // CDN을 못 불러와도(오프라인 등) 사이트 동작에는 영향 없음 — 숫자는 즉시 갱신되는 방식으로 자연스럽게 대체됨
 }
 </script>
 </body>

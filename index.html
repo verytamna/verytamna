@@ -543,6 +543,10 @@ function buildOrderData(){
   const subtotal = items.reduce((a,i)=>a+i.subtotal,0);
   const shipping = getShippingFee();
   return {
+    // qty: cartQty }
+    금액을 재계산하는 데 쓰는 실제 데이터. 아래 items/subtotal/shippingFee/total은
+    // 화면 표시·디버깅용 참고값일 뿐이며, 서버는 이 값들을 신뢰하지 않고 qty로 직접 재계산한다.
+    qty: { ...cartQty },
     items: items.map(i=>`${i.name} ${i.qty}kg`).join(', '),
     totalQty: getTotalQty(),
     subtotal: subtotal,

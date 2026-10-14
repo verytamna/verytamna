@@ -372,7 +372,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
         <div class="font-display text-2xl text-white"><span id="totalPrice">0</span>원</div>
       </div>
       <button type="button" id="btnSubmitOrder" class="amber-btn flex-1 sm:flex-none sm:min-w-[220px] h-12 rounded-xl font-bold flex items-center justify-center gap-2">
-        <i class="fa-solid fa-check"></i><span id="btnSubmitLabel">주문 접수하기</span>
+        <i class="fa-solid fa-check"></i><span id="btnSubmitLabel">주문서 제출하기</span>
       </button>
     </div>
   </div>
@@ -624,7 +624,7 @@ document.getElementById('btnSubmitOrder').addEventListener('click', async ()=>{
     deliveryMethod = null;
     update();
   }catch(e){
-    label.textContent = '주문 접수하기';
+    label.textContent = '주문서 제출하기';
     showStatus('접수 중 문제가 발생했어요. 죄송하지만 전화로 문의 부탁드려요.');
   }finally{
     btn.disabled = false;
